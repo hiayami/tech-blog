@@ -28,6 +28,18 @@ router.get('/', async (req, res) => {
   }
 });
 
+router.get('/post/create', async (req, res) => {
+  try {
+    res.render('upsert-post', {
+      logged_in: req.session.logged_in,
+      at_dashboard: true,
+    });
+  } catch (err) {
+    console.error(err)
+    res.status(500).json(err);
+  }
+});
+
 router.get('/post/:id', async (req, res) => {
   try {
     const postData = await Post.findByPk(req.params.id, {

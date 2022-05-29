@@ -1,4 +1,11 @@
-<button type="button" class="btn btn-primary btn-lg position-fixed bottom-0 start-50 translate-middle">+ New Post</button>
+<a 
+  type="button" 
+  role="button"
+  href="/post/create"
+  class="btn btn-primary btn-lg position-fixed bottom-0 start-50 translate-middle"
+>
++ New Post
+</a>
 {{#each posts as |post|}}
     <a class="text-reset text-decoration-none" href="/post/{{post.id}}/edit">
     <div class="card mb-4">
