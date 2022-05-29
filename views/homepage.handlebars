@@ -1,15 +1,25 @@
 <!-- Loop over each object in the projects array -->
-{{#each posts as |post| }}
-<a class="text-reset text-decoration-none" href="/post/{{post.id}}">
-<div class="card mb-4">
-  <div class="card-header d-flex justify-content-between">
-    <div><strong>{{post.title}}</strong></div>
-    <div><small>Posted by {{post.user.name}} on {{format_date post.date_created}}</small></div>
-  </div>
-  <div class="card-body">
-    <div class="card-text">{{post.description}}</div>
-  </div>
-</div>
-</a>
+{{#each posts as |post|}}
+  <a 
+    class="text-reset text-decoration-none" 
+    {{#if ../logged_in}}
+      href="/post/{{post.id}}"
+    {{else}}
+      href="/login"
+    {{/if}}
+  >
+    <div class="card mb-4">
+      <div class="card-header d-flex justify-content-between">
+        <div><strong>{{post.title}}</strong></div>
+        <div><small>Posted by
+            {{post.user.name}}
+            on
+            {{format_date post.date_created}}</small></div>
+      </div>
+      <div class="card-body">
+        <div class="card-text">{{post.description}}</div>
+      </div>
+    </div>
+  </a>
 
 {{/each}}
