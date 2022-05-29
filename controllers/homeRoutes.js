@@ -47,7 +47,8 @@ router.get('/post/:id', async (req, res) => {
 
     res.render('post', {
       ...post,
-      logged_in: req.session.logged_in
+      logged_in: req.session.logged_in,
+      at_home: true,
     });
   } catch (err) {
     console.error(err)
@@ -67,11 +68,36 @@ router.get('/login', (req, res) => {
   });
 });
 
-router.get('/dashboard', (req, res) => {
+router.get('/dashboard', async (req, res) => {
+  const postData = await Post.findAll({
+    where: {
+      user_id: req.session.user_id
+    }
+  })
+  const posts = postData.map((post) => post.get({ plain: true }));
   res.render('dashboard', {
+    posts,
     logged_in: req.session.logged_in,
     at_dashboard: true,
   });
+});
+
+router.get('/post/:id/edit', async (req, res) => {
+  try {
+    const postData = await Post.findByPk(req.params.id);
+
+    const post = postData.get({ plain: true });
+
+    res.render('upsert-post', {
+      ...post,
+      logged_in: req.session.logged_in,
+      at_dashboard: true,
+      is_updating: true,
+    });
+  } catch (err) {
+    console.error(err)
+    res.status(500).json(err);
+  }
 });
 
 module.exports = router;

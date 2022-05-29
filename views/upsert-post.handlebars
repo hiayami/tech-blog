@@ -1,0 +1,43 @@
+<div class="card mb-4">
+  <div class="card-header">
+    {{#if is_updating}}
+      Edit Post
+    {{else}}
+      Create New Post
+    {{/if}}
+  </div>
+  <div class="card-body">
+    <div class="card-text">
+      <form class="position-relative" action="/api/posts/{{id}}" method="post">
+        <div class="mb-3">
+          <label for="titleText" class="form-label">Title</label>
+          <input
+            type="text"
+            class="form-control"
+            id="titleText"
+            required="required"
+            name="title"
+            value="{{title}}"
+          />
+        </div>
+        <div class="mb-3">
+          <label for="commentText" class="form-label">Content</label>
+          <textarea
+            class="form-control"
+            id="commentText"
+            name="description"
+            required="required"
+            rows="3"
+          >{{description}}</textarea>
+        </div>
+        {{#if is_updating}}
+        <button class="btn btn-primary w-100 mb-1" type="submit">Update Post</button>
+        <button formaction="/api/posts/{{id}}/delete" class="btn btn-primary w-100" type="submit">Delete</button>
+        {{else}}
+        <button class="btn btn-primary w-100" type="submit">Create</button>
+        {{/if}}
+      </form>
+
+    </div>
+  </div>
+</div>
