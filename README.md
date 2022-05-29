@@ -43,6 +43,9 @@ THEN I am signed out of the site
 WHEN I am idle on the site for more than a set time
 THEN I am able to view comments but I am prompted to log in again before I can add, update, or delete comments
 ```
+
+![Tech Blog](https://user-images.githubusercontent.com/98536530/170852515-425cbe16-60b6-4dc1-a531-511b72728f93.png)
+
 ## Badges
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 ## Table of Contents
