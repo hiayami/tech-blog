@@ -1,23 +1,53 @@
+<!--post element-->
 <div class="card mb-4">
   <div class="card-header d-flex justify-content-between">
     <div><strong>{{title}}</strong></div>
-    <div><small>Posted by {{user.name}} on {{format_date date_created}}</small></div>
+    <div><small>Posted by
+        {{user.name}}
+        on
+        {{format_date date_created}}</small></div>
   </div>
   <div class="card-body">
     <div class="card-text">{{description}}</div>
   </div>
 </div>
 
-{{#each comments as |comment| }}
+<!--comment elements-->
+{{#each comments as |comment|}}
+  <div class="card mb-4">
+    <div class="card-header"></div>
+    <div class="card-body">
+      <div class="card-text">
+        {{comment.description}}
+        <br />
+        <br />
+        --{{comment.user.name}},
+        {{format_date comment.date_created}}
+      </div>
+    </div>
+  </div>
+{{/each}}
+
+<!--add comment form-->
 <div class="card mb-4">
   <div class="card-header"></div>
   <div class="card-body">
     <div class="card-text">
-      {{comment.description}}
-      <br/>
-      <br/>
-      --{{comment.user.name}}, {{format_date comment.date_created}}
+      <form class="position-relative" action="/api/comments" method="post">
+        <input class="invisible position-absolute" name="post_id" readonly type="number" value="{{id}}" style="z-index=-1;">
+        <div class="mb-3">
+          <label for="commentText" class="form-label">Comment</label>
+          <textarea
+            class="form-control"
+            id="commentText"
+            name="description"
+            required="required"
+            rows="3"
+          ></textarea>
+        </div>
+        <button class="btn btn-primary w-100" type="submit">Submit</button>
+      </form>
+
     </div>
   </div>
 </div>
-{{/each}}
